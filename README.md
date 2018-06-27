@@ -99,11 +99,11 @@ Follow the steps below to compile TrustZone non-secure code.
     
 1.	Compile by running command:
 
-    `mbed compile -m NUMAKER_PFM_M2351_NS -t ARMC6`
+    `mbed compile -m NUMAKER_PFM_M2351 -t ARMC6`
 
 1.  Flash compiled non-secure code
 
-    Drag-n-drop `BUILD/NUMAKER_PFM_M2351_NS/ARMC6/NuMaker-mbed-TZ-nonsecure-example.hex` onto **NUMAKER_PFM_M2351** board to flash compiled non-secure code.
+    Drag-n-drop `BUILD/NUMAKER_PFM_M2351/ARMC6/NuMaker-mbed-TZ-nonsecure-example.hex` onto **NUMAKER_PFM_M2351** board to flash compiled non-secure code.
 
 ## Execution
 
