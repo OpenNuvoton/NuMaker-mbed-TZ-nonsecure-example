@@ -17,9 +17,9 @@ In the following, we take **NUMAKER_PFM_M2351** as example target for explanatio
 
 In the following, we compile our program with **ARMC6** toolchain.
 
-## Partition flash/SRAM
+## Partition flash/SRAM/peripherals
 
-TBD
+TODO
 
 ## Compile TrustZone secure code
 
@@ -61,9 +61,11 @@ Follow the steps below to compile TrustZone secure code.
                 "platform.stdio-baud-rate": 9600,
                 "platform.stdio-convert-newlines": true
             },
-            "NUMAKER_PFM_M2351_S": {
+            "NUMAKER_PFM_M2351": {
                 <b>"tz-start-ns": "0x10024000",</b>
-                "target.device_has_remove": ["SERIAL", "SERIAL_ASYNCH", "SERIAL_FC", "STDIO_MESSAGES"]
+                "target.core": "Cortex-M23",
+                "target.inherits": ["NUMAKER_PFM_M2351"],
+                "target.device_has_remove": ["TRNG", "SERIAL", "SERIAL_ASYNCH", "SERIAL_FC", "STDIO_MESSAGES"]
             }
         }
     }
@@ -72,15 +74,15 @@ Follow the steps below to compile TrustZone secure code.
 
 1.	Compile by running command:
 
-    `mbed compile -m NUMAKER_PFM_M2351_S -t ARMC6`
+    `mbed compile -m NUMAKER_PFM_M2351 -t ARMC6`
     
 1.	Flash compiled secure code
 
-    Drag-n-drop `BUILD/NUMAKER_PFM_M2351_S/ARMC6/NuMaker-mbed-TZ-secure-example.hex` onto **NUMAKER_PFM_M2351** board to flash compiled secure code.
+    Drag-n-drop `BUILD/NUMAKER_PFM_M2351/ARMC6/NuMaker-mbed-TZ-secure-example.hex` onto **NUMAKER_PFM_M2351** board to flash compiled secure code.
 
 1.	Keep secure gateway library
 
-    Keep `BUILD/NUMAKER_PFM_M2351_S/ARMC6/cmse-lib.o` for later use.
+    Keep `BUILD/NUMAKER_PFM_M2351/ARMC6/cmse-lib.o` for later use.
 
 
 ## Compile TrustZone non-secure code
