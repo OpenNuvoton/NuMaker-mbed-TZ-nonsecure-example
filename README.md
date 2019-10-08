@@ -84,7 +84,14 @@ Follow the steps below to compile TrustZone non-PSA secure code.
 
     The [secure code](https://github.com/OpenNuvoton/NuMaker-mbed-TZ-nonsecure-example) runs with RTOS disabled by default.
     This is preferred configuration for secure code to decrease memory footprint.
-    To run with RTOS enabled, clear up all the content in `.mbedignore`.
+    To run with RTOS enabled, remove the `"requires": ["bare-metal"]` line.
+
+    ```json
+    {
+        "requires": ["bare-metal"],
+        ......
+    }
+    ```
 
 1.  Tell Mbed of boot stack size when RTOS is absent for secure world (optional, preferred)
 
@@ -111,12 +118,35 @@ Follow the steps below to compile TrustZone non-PSA secure code.
     To run with serial enabled, add "SERIAL", "SERIAL_ASYNCH", "SERIAL_FC", and "STDIO_MESSAGES" in the configuration option `target.device_has_add`.
 
     ```json
-    "target_overrides": {
-        ......
-        "NU_PFM_M2351_NPSA_S": {
+    {
+        "target_overrides": {
             ......
-            "target.device_has_add": ["SERIAL", "SERIAL_ASYNCH", "SERIAL_FC", "STDIO_MESSAGES"],
-            ......
+            "NU_PFM_M2351_NPSA_S": {
+                ......
+                "target.device_has_add": ["SERIAL", "SERIAL_ASYNCH", "SERIAL_FC", "STDIO_MESSAGES"],
+                ......
+            }
+        }
+    }
+    ```
+
+    Besides, disable STDIO buffered serial explicitly as well.
+    STDIO buffered serial needs USB UART INT.
+    By default, both USB UART and its INT are configured as non-secure.
+    Even though secure code can control this UART via non-secure data access, there's no USB UART INT in secure side.
+    So disable this function explicitly for safe.
+
+    ```json
+    {
+        "target_overrides": {
+            "*": {
+                ......
+                "platform.stdio-buffered-serial"    : false
+            },
+            "NU_PFM_M2351_NPSA_S": {
+                "target.device_has_add": ["SERIAL", "SERIAL_ASYNCH", "SERIAL_FC", "STDIO_MESSAGES"],
+                ......
+            }
         }
     }
     ```
@@ -124,17 +154,17 @@ Follow the steps below to compile TrustZone non-PSA secure code.
     To run with serial disabled, add "SERIAL", "SERIAL_ASYNCH", "SERIAL_FC", and "STDIO_MESSAGES" in the configuration option `target.device_has_remove`.
 
     ```json
-    "target_overrides": {
-        ......
-        "NU_PFM_M2351_NPSA_S": {
+    {
+        "target_overrides": {
             ......
-            "target.device_has_remove": ["SERIAL", "SERIAL_ASYNCH", "SERIAL_FC", "STDIO_MESSAGES"],
-            ......
+            "NU_PFM_M2351_NPSA_S": {
+                ......
+                "target.device_has_remove": ["SERIAL", "SERIAL_ASYNCH", "SERIAL_FC", "STDIO_MESSAGES"],
+                ......
+            }
         }
     }
     ```
-
-    
 
 1.  Change non-secure jump address (optional)
 
@@ -143,12 +173,14 @@ Follow the steps below to compile TrustZone non-PSA secure code.
     To jump to non-secure address `0x10044000`, `mbed_app.json` would have:
    
     ```json
-    "target_overrides": {
-        ......
-        "NU_PFM_M2351_NPSA_S": {
+    {
+        "target_overrides": {
             ......
-            "tz-start-ns": "0x10044000",
-            ......
+            "NU_PFM_M2351_NPSA_S": {
+                ......
+                "tz-start-ns": "0x10044000",
+                ......
+            }
         }
     }
     ```
@@ -198,7 +230,7 @@ Follow the steps below to compile TrustZone non-PSA non-secure code.
     }
     ```
 
-1.  Exclude pre-built secure code
+1.  Exclude pre-built secure image/gateway library
 
     There has been a pre-built secure code in mbed-os directory tree.
     To link with our own one as above, we must exclude the pre-built one.
