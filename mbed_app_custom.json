@@ -11,6 +11,14 @@
             "target.mbed_rom_size"              : "0x40000",
             "target.mbed_ram_start"             : "0x30008000",
             "target.mbed_ram_size"              : "0x10000"
+        },
+        "NU_M2354_NPSA_NS": {
+            "target.extra_labels_remove"        : ["NU_PREBUILD_SECURE"],
+
+            "target.mbed_rom_start"             : "0x10080000",
+            "target.mbed_rom_size"              : "0x80000",
+            "target.mbed_ram_start"             : "0x30020000",
+            "target.mbed_ram_size"              : "0x20000"
         }
     }
 }
