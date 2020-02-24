@@ -13,7 +13,7 @@ int main(void)
 
     unsigned count = 0;
     while (1) {
-        Thread::wait(500);
+        ThisThread::sleep_for(500);
 
         led = ! led;
         printf("Non-secure main thread: %d \r\n", count ++);
