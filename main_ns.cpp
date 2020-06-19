@@ -9,6 +9,8 @@ int main(void)
     printf("|    Non-secure code is running ...           |\r\n");
     printf("+---------------------------------------------+\r\n");
 
+    printf("TERM CONF: %d/8-N-1\r\n", MBED_CONF_PLATFORM_STDIO_BAUD_RATE);
+
     DigitalOut led(LED1);
 
     unsigned count = 0;
