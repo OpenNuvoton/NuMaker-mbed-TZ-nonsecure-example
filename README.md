@@ -80,12 +80,10 @@ Follow the steps below to compile TrustZone non-PSA secure code.
     }
     ```
 
-1.  Enable RTOS (optional, not preferred)
+1.  Don't enable RTOS
 
-    The [secure code](https://github.com/OpenNuvoton/NuMaker-mbed-TZ-nonsecure-example) runs with RTOS disabled by default.
-    This is preferred configuration for secure code to decrease memory footprint.
-    To run with RTOS enabled, remove the `"requires": ["bare-metal"]` line.
-
+    The [secure code](https://github.com/OpenNuvoton/NuMaker-mbed-TZ-nonsecure-example) runs with RTOS disabled.
+    Secure code with RTOS is not supported yet.
     ```json
     {
         "requires": ["bare-metal"],
