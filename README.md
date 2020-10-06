@@ -86,7 +86,7 @@ Follow the steps below to compile TrustZone non-PSA secure code.
     Secure code with RTOS is not supported yet.
     ```json
     {
-        "requires": ["bare-metal"],
+        "requires": ["bare-metal", "rtos-api"],
         ......
     }
     ```
@@ -185,7 +185,7 @@ Follow the steps below to compile TrustZone non-PSA secure code.
 
 1.	Compile by running command:
     ```sh
-    mbed compile -m NU_PFM_M2351_NPSA_S -t ARMC6 --app-config mbed_app_custom.json
+    mbed compile -m NU_PFM_M2351_NPSA_S -t ARM --app-config mbed_app_custom.json
     ```
 
 1.	Flash compiled secure code
@@ -194,8 +194,8 @@ Follow the steps below to compile TrustZone non-PSA secure code.
 
 1.	Keep compiled secure code for non-secure code build process
 
-    - `BUILD/NU_PFM_M2351_NPSA_S/ARMC6/NuMaker-mbed-TZ-secure-example.hex`
-    - `BUILD/NU_PFM_M2351_NPSA_S/ARMC6/cmse-lib.o`
+    - `BUILD/NU_PFM_M2351_NPSA_S/ARM/NuMaker-mbed-TZ-secure-example.hex`
+    - `BUILD/NU_PFM_M2351_NPSA_S/ARM/cmse-lib.o`
 
 ## Compile TrustZone non-PSA non-secure code
 
@@ -250,12 +250,12 @@ Follow the steps below to compile TrustZone non-PSA non-secure code.
 1.	Compile by running command:
 
     ```sh
-    mbed compile -m NU_PFM_M2351_NPSA_NS -t ARMC6 --app-config mbed_app_custom.json
+    mbed compile -m NU_PFM_M2351_NPSA_NS -t ARM --app-config mbed_app_custom.json
     ```
 
 1.  Flash compiled secure/non-secure code together
 
-    Drag-n-drop `BUILD/NU_PFM_M2351_NPSA_NS/ARMC6/NuMaker-mbed-TZ-nonsecure-example.hex` onto **NuMaker_PFM_M2351** board to flash compiled secure/non-secure code together.
+    Drag-n-drop `BUILD/NU_PFM_M2351_NPSA_NS/ARM/NuMaker-mbed-TZ-nonsecure-example.hex` onto **NuMaker_PFM_M2351** board to flash compiled secure/non-secure code together.
 
 ## Execution
 
