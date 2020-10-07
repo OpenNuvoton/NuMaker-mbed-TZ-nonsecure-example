@@ -91,6 +91,20 @@ Follow the steps below to compile TrustZone non-PSA secure code.
     }
     ```
 
+1.  Adjust TZ process max stack slots/stack size
+    ```json
+    "macros": [
+        "MBED_CONF_TZ_PROCESS_STACK_SLOTS=8",
+        "MBED_CONF_TZ_PROCESS_STACK_SIZE=2048",
+        ......
+    ],
+    ```
+    **NOTE1**: TZ max stack slots (`MBED_CONF_TZ_PROCESS_STACK_SLOTS`) limits max NS threads which enable TZ access `(MBED_TZ_DEFAULT_ACCESS`).
+
+    **NOTE2**: TZ stack size (`MBED_CONF_TZ_PROCESS_STACK_SIZE`) is for secure library (NSC function). Its value is enlarged for custom NSC function.
+
+    **NOTE3**: Avoid `printf`-like call in NSC function because it needs large stack and risks stack overflow.
+
 1.  Tell Mbed of boot stack size when RTOS is absent for secure world (optional, preferred)
 
     The default boot stack size when RTOS is absent may not meet your requirement. Change it explicitly.
