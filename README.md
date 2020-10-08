@@ -178,6 +178,21 @@ Follow the steps below to compile TrustZone non-PSA secure code.
     }
     ```
 
+1.  Enable fault handler dump message (optional)
+    ```json
+    {
+        "target_overrides": {
+            ......
+            "NU_PFM_M2351_NPSA_S": {
+                ......
+                "target.macros_remove": ["MBED_FAULT_HANDLER_DISABLED"],
+                ......
+            }
+        }
+    }
+    ```
+    **NOTE**: This gets unnecessary when fault handler dump message gets to enabled by default in future Mbed OS version.
+
 1.  Change non-secure jump address (optional)
 
     This is done by configuring `tz-start-ns` in `mbed_app.json`.
